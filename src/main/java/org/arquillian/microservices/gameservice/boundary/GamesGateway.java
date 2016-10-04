@@ -1,6 +1,7 @@
 package org.arquillian.microservices.gameservice.boundary;
 
 import org.arquillian.microservices.gameservice.entity.Game;
+import org.arquillian.microservices.gameservice.entity.Pegi;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -21,14 +22,14 @@ public class GamesGateway {
         metalGearV.setDevelopers("Kojima Productions");
         metalGearV.setSeries("Metal Gear");
         metalGearV.setTitle("Metal Gear V: The Phantom Pain");
-        metalGearV.setContentRating(18);
+        metalGearV.setPegi(Pegi.PEGI_18);
 
         Game uncharted4 = new Game();
         uncharted4.setId(2L);
         uncharted4.setDevelopers("Naughty Dog");
         uncharted4.setSeries("Uncharted");
         uncharted4.setTitle("Uncharted 4: A Thief's End");
-        uncharted4.setContentRating(16);
+        uncharted4.setPegi(Pegi.PEGI_16);
 
         games.add(metalGearV);
         games.add(uncharted4);

@@ -9,7 +9,7 @@ public class Game {
     private String title;
     private String developers;
     private String series;
-    private int contentRating;
+    private Pegi pegi;
 
     public Long getId() {
         return id;
@@ -43,12 +43,12 @@ public class Game {
         this.series = series;
     }
 
-    public int getContentRating() {
-        return contentRating;
+    public Pegi getPegi() {
+        return pegi;
     }
 
-    public void setContentRating(int contentRating) {
-        this.contentRating = contentRating;
+    public void setPegi(Pegi pegi) {
+        this.pegi = pegi;
     }
 
     public JsonObject toJsonObject() {
@@ -56,7 +56,7 @@ public class Game {
                 .add("title", getTitle())
                 .add("developers", getDevelopers())
                 .add("series", getSeries())
-                .add("contentRating", getContentRating())
+                .add("pegi", getPegi().name())
             .build();
     }
 
