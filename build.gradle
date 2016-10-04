@@ -1,11 +1,18 @@
 apply plugin: 'war'
 
-repositories {
-    mavenCentral()
+
+allprojects {
+    group = 'org.arquillian.microservices'
+    version = '1.0.0-SNAPSHOT'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
 }
 
 dependencies {
-
     providedCompile 'javax:javaee-api:7.0'
-
 }
