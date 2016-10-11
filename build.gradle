@@ -1,5 +1,14 @@
 apply plugin: 'war'
 
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-docker-plugin:3.0.3'
+    }
+}
 
 allprojects {
     group = 'org.arquillian.microservices'
@@ -15,4 +24,24 @@ allprojects {
 
 dependencies {
     providedCompile 'javax:javaee-api:7.0'
+}
+
+war {
+    archiveName 'game-service.war'
+}
+
+apply plugin: 'com.bmuschko.docker-remote-api'
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+
+docker {
+    if (System.env.containsKey('DOCKER_HOST') && System.env.containsKey('DOCKER_CERT_PATH')) {
+        url = System.env.DOCKER_HOST.replace("tcp", "https")
+        certPath = new File(System.env.DOCKER_CERT_PATH)
+    }
+}
+
+task buildImage(type: DockerBuildImage) {
+    dependsOn assemble
+    inputDir = project.rootDir
+    tag = "arquillian/game-service:${project.version}"
 }
