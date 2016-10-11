@@ -1,5 +1,3 @@
-apply plugin: 'war'
-
 buildscript {
     repositories {
         jcenter()
@@ -9,6 +7,8 @@ buildscript {
         classpath 'com.bmuschko:gradle-docker-plugin:3.0.3'
     }
 }
+
+apply plugin: 'war'
 
 allprojects {
     group = 'org.arquillian.microservices'
