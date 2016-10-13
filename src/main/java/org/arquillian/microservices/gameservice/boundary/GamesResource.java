@@ -1,5 +1,6 @@
 package org.arquillian.microservices.gameservice.boundary;
 
+import org.arquillian.microservices.gameservice.controller.GamesController;
 import org.arquillian.microservices.gameservice.entity.Game;
 
 import javax.inject.Inject;
@@ -15,24 +16,20 @@ import java.util.Optional;
 public class GamesResource {
 
     @Inject
-    GamesGateway gamesGateway;
+    GamesController gamesController;
 
     @GET
     @Path("title/{title}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getGameByTitle(@PathParam("title") String title) {
 
-        final Optional<Game> game = gamesGateway.findGameByTitle(title);
+        Optional<Game> game = gamesController.findGameAndCheckPegi(16, title);
 
-        if (game.isPresent()) {
-            return Response.ok(
-                        game.get().toJsonObject())
-                    .build();
-        } else {
-            return Response.status(
+        return game
+                .map(g -> Response.ok(g.toJsonObject()).build())
+                .orElse(Response.status(
                         Response.Status.NOT_FOUND)
-                    .build();
-        }
+                        .build());
 
     }
 

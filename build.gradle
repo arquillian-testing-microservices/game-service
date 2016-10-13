@@ -8,6 +8,10 @@ buildscript {
     }
 }
 
+plugins {
+    id "io.spring.dependency-management" version "0.6.1.RELEASE"
+}
+
 apply plugin: 'war'
 
 allprojects {
@@ -24,6 +28,14 @@ allprojects {
 
 dependencies {
     providedCompile 'javax:javaee-api:7.0'
+    compile 'org.apache.deltaspike.core:deltaspike-core-api'
+    runtime 'org.apache.deltaspike.core:deltaspike-core-impl'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.apache.deltaspike.distribution:distributions-bom:1.7.1'
+    }
 }
 
 war {
