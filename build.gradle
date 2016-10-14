@@ -30,11 +30,25 @@ dependencies {
     providedCompile 'javax:javaee-api:7.0'
     compile 'org.apache.deltaspike.core:deltaspike-core-api'
     runtime 'org.apache.deltaspike.core:deltaspike-core-impl'
+    // tag::contract-tests[]
+    testCompile 'org.jboss.arquillian.junit:arquillian-junit-container'
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.arquillian.container:arquillian-container-chameleon:1.0.0.Alpha7'
+    testCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-api-maven'
+    testCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-impl-maven'
+    testCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-impl-maven-archive'
+    testCompile 'org.arquillian.pact:arquillian-pact-consumer-core:1.0.0.Alpha2'
+    testCompile 'au.com.dius:pact-jvm-consumer_2.11:3.5.0-beta.2'
+    // end::contract-tests[]
 }
 
 dependencyManagement {
     imports {
         mavenBom 'org.apache.deltaspike.distribution:distributions-bom:1.7.1'
+        // tag::contract-tests[]
+        mavenBom 'org.jboss.arquillian:arquillian-bom:1.1.11.Final'
+        mavenBom 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-depchain:2.2.4'
+        // end::contract-tests[]
     }
 }
 
