@@ -54,9 +54,6 @@ public class AgeCheckerConsumer {
     @Pact(provider = "age-checker", consumer = "game-service")
     public PactFragment createFragmentWithValidAge(PactDslWithProvider builder) {
 
-        Map<String, String> header = new HashMap<>();
-        header.put("Content-Type", "application/json");
-
         return builder
                 .uponReceiving("User older than PEGI description")
                     .path("/checker/")
@@ -77,9 +74,6 @@ public class AgeCheckerConsumer {
 
     @Pact(provider = "age-checker", consumer = "game-service")
     public PactFragment createFragmentWithInvalidAge(PactDslWithProvider builder) {
-
-        Map<String, String> header = new HashMap<>();
-        header.put("Content-Type", "application/json");
 
         return builder
                 .uponReceiving("User younger than PEGI description")
