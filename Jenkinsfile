@@ -2,16 +2,16 @@ node {
 
    stage('Preparation') { // for display purposes
       // Get some code from a GitHub repository
-      git checkout
+      checkout scm
    }
    stage('Build') {
       sh "./gradlew clean compileTestJava"
    }
    stage('Consumer Tests') {
-      sh "./gradlew testJava"
+      sh "./gradlew test"
    }
 
    stage('Publish Results') {
-      junit '**/target/surefire-reports/TEST-*.xml'
+      junit '**/build/test-results/TEST-*.xml'
    }
 }
