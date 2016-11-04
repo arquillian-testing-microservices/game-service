@@ -19,12 +19,16 @@ import org.junit.runner.RunWith;
 
 import javax.inject.Inject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.arquillian.microservices.gameservice.entity.Pegi.PEGI_16;
 import static org.arquillian.microservices.gameservice.entity.Pegi.PEGI_18;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 @RunWith(Arquillian.class)
+@Pact(provider = "age-checker", consumer = "game-service")
 public class AgeCheckerConsumer {
 
     @Deployment
@@ -49,13 +53,16 @@ public class AgeCheckerConsumer {
     @Inject
     AgeCheckerGateway ageCheckerGateway;
 
-    @Pact(provider = "age-checker", consumer = "game-service")
     public PactFragment createFragmentWithValidAge(PactDslWithProvider builder) {
+
+        final Map<String, String> headers = new HashMap<>();
+        headers.put("Content-Type", "application/json");
 
         return builder
                 .uponReceiving("User older than PEGI description")
                     .path("/checker/")
                     .method("POST")
+                    .headers(headers)
                     .body(toJson(
                             "{                  " +
                             "  'age': 18,       " +
@@ -70,13 +77,16 @@ public class AgeCheckerConsumer {
 
     }
 
-    @Pact(provider = "age-checker", consumer = "game-service")
     public PactFragment createFragmentWithInvalidAge(PactDslWithProvider builder) {
+
+        final Map<String, String> headers = new HashMap<>();
+        headers.put("Content-Type", "application/json");
 
         return builder
                 .uponReceiving("User younger than PEGI description")
                  .path("/checker/")
                  .method("POST")
+                 .headers(headers)
                  .body(toJson(
                  "{                  " +
                  "  'age': 16,       " +

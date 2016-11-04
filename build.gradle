@@ -23,6 +23,7 @@ allprojects {
 
     repositories {
         mavenCentral()
+        mavenLocal()
     }
 }
 
@@ -37,7 +38,8 @@ dependencies {
     testCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-api-maven'
     testCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-impl-maven'
     testCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-impl-maven-archive'
-    testCompile 'org.arquillian.pact:arquillian-pact-consumer-core:1.0.0.Alpha3'
+    testCompile 'org.arquillian.pact:arquillian-pact-consumer-core:1.0.0.Final-SNAPSHOT'
+    testCompile 'org.arquillian.pact:arquillian-pact-consumer-git-publisher:1.0.0.Final-SNAPSHOT'
     testCompile 'au.com.dius:pact-jvm-consumer_2.11:3.5.0-beta.2'
     // end::contract-tests[]
 }

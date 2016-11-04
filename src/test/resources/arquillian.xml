@@ -10,4 +10,15 @@
         </configuration>
     </container>
 
+    <extension qualifier="pact-consumer">
+        <property name="pactPublishConfiguration">
+            provider: git
+            url: http://localhost:3000/alex/gamer-contracts.git
+            username: alex
+            password: alex
+            comment: New Contract for Version 1.0.0
+        </property>
+        <property name="publishContracts">${env.publishcontracts:false}</property>
+    </extension>
+
 </arquillian>
