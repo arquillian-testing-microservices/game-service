@@ -8,7 +8,9 @@ node {
       sh "./gradlew clean compileTestJava"
    }
    stage('Consumer Tests') {
-      sh "./gradlew test"
+      withEnv(['publishcontracts=true']) {
+        sh "./gradlew test"
+      }
    }
 
    stage('Publish Results') {
