@@ -18,8 +18,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import javax.inject.Inject;
-import java.util.HashMap;
-import java.util.Map;
 
 import static org.arquillian.microservices.gameservice.entity.Pegi.PEGI_16;
 import static org.arquillian.microservices.gameservice.entity.Pegi.PEGI_18;
