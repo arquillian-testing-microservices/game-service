@@ -55,7 +55,7 @@ dependencyManagement {
 }
 
 test {
-    systemProperties "artifactversion", version
+    systemProperty "artifactversion", version
 }
 
 
