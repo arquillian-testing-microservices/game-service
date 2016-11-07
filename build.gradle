@@ -54,6 +54,11 @@ dependencyManagement {
     }
 }
 
+test {
+    systemProperties "artifactversion", version
+}
+
+
 war {
     archiveName 'game-service.war'
 }

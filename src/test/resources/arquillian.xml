@@ -16,7 +16,7 @@
             url: http://localhost:3000/alex/gamer-contracts.git
             username: alex
             password: alex
-            comment: New Contract for Version 1.0.0
+            comment: New Contract for Version ${artifactversion:1.0.0}
         </property>
         <property name="publishContracts">${env.publishcontracts:false}</property>
     </extension>
