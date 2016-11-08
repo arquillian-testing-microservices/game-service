@@ -16,4 +16,10 @@ node {
    stage('Publish Results') {
       junit '**/build/test-results/TEST-*.xml'
    }
+
+   stage('Provider Contract Tests') {
+      job = build job: 'age-checker', parameters: [string(name: 'agecheckerurl', value: '')], propagate: false
+   }
+
+
 }
