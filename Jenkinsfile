@@ -17,15 +17,25 @@ node {
         junit '**/build/test-results/TEST-*.xml'
     }
 
+    def headResult, productionResult
     stage('Provider Contract Tests') {
-        def headResult, productionResult
+
         parallel (
             headRun : { headResult = build job: 'age-checker', parameters: [string(name: 'agecheckerurl', value: '')], propagate: false },
             productionRun : { productionResult = build job: 'age-checker', parameters: [string(name: 'agecheckerurl', value: 'http://192.168.99.100:8090')], propagate: false}
         )
+    }
 
-        echo headResult.result
-        echo productionResult.result
+    if (productionResult.result != 'SUCCESS') {
+        currentBuild.result = 'FAILURE'
+    } else {
+        def message = "Do you want to Deploy Game Service To Production? Contract Tests against Production \u2705 Contract Tests against HEAD "
+        def icon = headRun.result != 'SUCCESS' ? "\u274C" : "\u2705"
+        message += icon
+        stage('Deploy To Production?') {
+            def result = input "${message}"
+            echo result
+        }
     }
 
 }
