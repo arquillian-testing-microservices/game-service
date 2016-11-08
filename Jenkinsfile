@@ -7,7 +7,7 @@ node {
     stage('Build') {
         sh "./gradlew clean compileTestJava"
     }
-    stage('Consumer Tests') {
+    stage('Consumer Contract Tests') {
         withEnv(['publishcontracts=true']) {
             sh "./gradlew test"
         }
@@ -30,7 +30,7 @@ node {
         currentBuild.result = 'FAILURE'
     } else {
         def message = "Do you want to Deploy Game Service To Production? Contract Tests against Production \u2705 Contract Tests against HEAD "
-        def icon = headRun.result != 'SUCCESS' ? "\u274C" : "\u2705"
+        def icon = headResult.result != 'SUCCESS' ? "\u274C" : "\u2705"
         message += icon
         stage('Deploy To Production?') {
             def result = input "${message}"
