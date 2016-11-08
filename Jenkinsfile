@@ -24,8 +24,8 @@ node {
             productionRun : { productionResult = build job: 'age-checker', parameters: [string(name: 'agecheckerurl', value: 'http://192.168.99.100:8090')], propagate: false}
         )
 
-        echo headResult
-        echo productionResult
+        echo headResult.result
+        echo productionResult.result
     }
 
 }
