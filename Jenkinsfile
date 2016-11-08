@@ -29,12 +29,13 @@ node {
     if (productionResult.result != 'SUCCESS') {
         currentBuild.result = 'FAILURE'
     } else {
-        def message = "Do you want to Deploy Game Service To Production? Contract Tests against Production \u2705 Contract Tests against HEAD "
+        def lineSeparator = System.lineSeparator()
+        def message = "Do you want to Deploy Game Service To Production? ${lineSeparator} Contract Tests against Production \u2705 ${lineSeparator} Contract Tests against HEAD "
         def icon = headResult.result != 'SUCCESS' ? "\u274C" : "\u2705"
         message += icon
         stage('Deploy To Production?') {
-            def result = input "${message}"
-            echo result
+            input "${message}"
+            echo "deployed to Production"
         }
     }
 
