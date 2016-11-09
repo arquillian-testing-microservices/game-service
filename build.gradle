@@ -61,6 +61,16 @@ test {
 }
 
 
+task createBuildInfoFile << {
+
+    def buildInfoFile = new File("$buildDir/build-info.properties")
+    Properties props = new Properties()
+    props.setProperty('version', project.version.toString())
+    props.setProperty('timestamp', project.buildTimestamp)
+    props.store(buildInfoFile.newWriter(), null)
+}
+
+
 war {
 
     dependsOn createBuildInfoFile
@@ -70,15 +80,6 @@ war {
     manifest {
         attributes "Implementation-Version": project.version.toString()
     }
-}
-
-task createBuildInfoFile << {
-
-    def buildInfoFile = new File("$buildDir/build-info.properties")
-    Properties props = new Properties()
-    props.setProperty('version', project.version.toString())
-    props.setProperty('timestamp', project.buildTimestamp)
-    props.store(buildInfoFile.newWriter(), null)
 }
 
 apply plugin: 'com.bmuschko.docker-remote-api'
