@@ -13,10 +13,11 @@
     <extension qualifier="pact-consumer">
         <property name="pactPublishConfiguration">
             provider: git
-            url: http://localhost:3000/alex/gamer-contracts.git
-            username: alex
-            password: alex
-            comment: New Contract for Version ${artifactversion:1.0.0}
+            url: ${env.giturl:http://localhost:3000/alex/gamer-contracts.git}
+            username: ${env.gitusername:alex}
+            password: ${env.gitpassword:alex}
+            comment: New Contract for Version ${env.artifactversion:1.0.0}
+            tag: ${env.artifactversion:1.0.0}
         </property>
         <property name="publishContracts">${env.publishcontracts:false}</property>
     </extension>

@@ -7,13 +7,25 @@ node {
     stage('Build') {
         sh "./gradlew clean compileTestJava"
     }
+
+    stage('Tests') {
+        echo 'Running Unit and Component Tests'
+    }
+
+    stage('Assemble Application') {
+        withEnv(["SOURCE_BUILD_NUMBER=${env.BUILD_NUMBER}"]) {
+            sh "./gradlew assemble"
+        }
+    }
+
     stage('Consumer Contract Tests') {
-        withEnv(['publishcontracts=true']) {
+        def props = readProperties file: 'build/build-info.properties'
+        withEnv(['publishcontracts=true', "artifactversion=${props['version']}"]) {
             sh "./gradlew test"
         }
     }
 
-    stage('Publish Results') {
+    stage('Publish Contract Results') {
         junit '**/build/test-results/TEST-*.xml'
     }
 
