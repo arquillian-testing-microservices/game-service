@@ -33,13 +33,22 @@ node {
     stage('Provider Contract Tests') {
 
         parallel (
-            headRun : { headResult = build job: 'age-checker', parameters: [string(name: 'agecheckerurl', value: '')], propagate: false },
-            productionRun : { productionResult = build job: 'age-checker', parameters: [string(name: 'agecheckerurl', value: 'http://192.168.99.100:8090')], propagate: false}
+            headRun : {
+                        headResult = build job: 'age-checker', parameters: [string(name: 'agecheckerurl', value: '')], propagate: false
+                        def icon = headResult.result != 'SUCCESS' ? "\u2717" : "\u2713"
+                        echo "Contract test against head Age Checker Service ${icon}"
+            },
+            productionRun : {
+                        productionResult = build job: 'age-checker', parameters: [string(name: 'agecheckerurl', value: 'http://192.168.99.100:8090')], propagate: false
+                        def icon = productionResult.result != 'SUCCESS' ? "\u2717" : "\u2713"
+                        echo "Contract test against production Age Checker Service ${icon}"
+            }
         )
     }
 
     if (productionResult.result != 'SUCCESS') {
         currentBuild.result = 'FAILURE'
+        echo "\u274C Game Service cannot be deployed to production since Age Checker Service is not compatible with current GameService."
     } else {
         def lineSeparator = System.lineSeparator()
         def message = "Do you want to Deploy Game Service To Production? ${lineSeparator} Contract Tests against Production \u2705 ${lineSeparator} Contract Tests against HEAD "
