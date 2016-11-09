@@ -16,6 +16,7 @@ if (m) {
     Integer minor = m[0][2].toInteger()
 
     project.version = new ProjectVersion(major, minor, System.env.SOURCE_BUILD_NUMBER)
+
 }
 
 class ProjectVersion {
