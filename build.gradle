@@ -16,7 +16,7 @@ apply plugin: 'war'
 
 allprojects {
     group = 'org.arquillian.microservices'
-    version = '1.0-SNAPSHOT'
+    version = '1.0.0-SNAPSHOT'
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
