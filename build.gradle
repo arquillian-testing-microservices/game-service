@@ -38,8 +38,8 @@ dependencies {
     testCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-api-maven'
     testCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-impl-maven'
     testCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-impl-maven-archive'
-    testCompile 'org.arquillian.algeron:arquillian-algeron-pact-consumer-core:1.0.0.Final-SNAPSHOT'
-    testCompile 'org.arquillian.algeron:arquillian-algeron-pact-consumer-git-publisher:1.0.0.Final-SNAPSHOT'
+    testCompile 'org.arquillian.algeron:arquillian-algeron-pact-consumer-core:1.0.0.Alpha5'
+    testCompile 'org.arquillian.algeron:arquillian-algeron-consumer-git-publisher:1.0.0.Alpha5'
     testCompile 'au.com.dius:pact-jvm-consumer_2.11:3.5.0-beta.2'
     // end::contract-tests[]
 }
@@ -48,7 +48,7 @@ dependencyManagement {
     imports {
         mavenBom 'org.apache.deltaspike.distribution:distributions-bom:1.7.1'
         // tag::contract-tests[]
-        mavenBom 'org.jboss.arquillian:arquillian-bom:1.1.11.Final'
+        mavenBom 'org.jboss.arquillian:arquillian-bom:1.1.12.Final'
         mavenBom 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-depchain:2.2.4'
         // end::contract-tests[]
     }

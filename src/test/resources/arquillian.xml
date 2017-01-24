@@ -10,16 +10,20 @@
         </configuration>
     </container>
 
-    <extension qualifier="pact-consumer">
-        <property name="pactPublishConfiguration">
+    <extension qualifier="algeron-consumer">
+        <property name="publishConfiguration">
             provider: git
             url: ${env.giturl:http://localhost:3000/alex/gamer-contracts.git}
             username: ${env.gitusername:alex}
             password: ${env.gitpassword:alex}
             comment: New Contract for Version ${env.artifactversion:1.0.0}
-            tag: ${env.artifactversion:1.0.0}
+            contractsFolder: target/pacts
         </property>
-        <property name="publishContracts">${env.publishcontracts:false}</property>
+        <property name="publishContracts">${env.publishcontracts:true}</property>
+    </extension>
+
+    <extension qualifier="pact-consumer">
+
     </extension>
 
 </arquillian>
